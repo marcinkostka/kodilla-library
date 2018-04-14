@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Reader {
     private String lastName;
 
     @Column(name = "registered")
-    private Date registered;
+    private LocalDate registered;
 
     @OneToMany(
             targetEntity = Rental.class,
@@ -41,6 +42,13 @@ public class Reader {
     public Reader(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.registered = new Date();
+        this.registered = LocalDate.now();
+    }
+
+    public Reader(Long id, String firstName, String lastName, LocalDate registered) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.registered = registered;
     }
 }

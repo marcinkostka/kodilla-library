@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class BookCopyDto {
     private Long id;
-    private Book book;
-    private String status;
+    private Long bookId;
+    private BookStatuses status;
 }

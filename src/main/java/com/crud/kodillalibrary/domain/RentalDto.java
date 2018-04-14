@@ -9,6 +9,6 @@ import java.time.LocalDate;
 @Getter
 public class RentalDto {
     private Long id;
-    private LocalDate returnDate;
-    private LocalDate rentDate;
+    private Long readerId;
+    private Long bookCopyId;
 }

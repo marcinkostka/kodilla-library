@@ -1,5 +1,6 @@
 package com.crud.kodillalibrary.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,19 +10,12 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "rentals")
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(name = "returnDate")
-    private LocalDate returnDate;
-
-    @Column(name = "rentDate")
-    private LocalDate rentDate;
 
     @ManyToOne
     @JoinColumn(name = "readerId")
@@ -31,8 +25,25 @@ public class Rental {
     @JoinColumn(name = "bookCopyId")
     private BookCopy bookCopy;
 
-    public Rental(LocalDate rentDate, LocalDate returnDate) {
-        this.rentDate = rentDate;
-        this.returnDate = returnDate;
+    @Column(name = "rentDate")
+    private LocalDate rentDate;
+
+    @Column(name = "returnDate")
+    private LocalDate returnDate;
+
+    public Rental() {
+        this.rentDate = LocalDate.now();
+        this.returnDate = null;
+    }
+
+    public Rental(Long id, Reader reader, BookCopy bookCopy) {
+        this.id = id;
+        this.reader = reader;
+        this.bookCopy = bookCopy;
+        this.rentDate = LocalDate.now();
+        this.returnDate = null;
+    }
+    public void resetReturnDate() {
+        this.returnDate = LocalDate.now();
     }
 }

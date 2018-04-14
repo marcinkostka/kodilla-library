@@ -2,12 +2,22 @@ package com.crud.kodillalibrary.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+
+@NamedNativeQuery(
+        name = "BookCopy.getCountOfBookCopiesByBookTitleAndAvailable",
+        query = "SELECT count(*)" +
+                " FROM books b, books_copy bc" +
+                " WHERE b.id = bc.book_id" +
+                " AND b.title = :TITLE" +
+                " AND bc.status = 'AVAILABLE'"
+)
 
 @Getter
 @Setter
@@ -19,9 +29,9 @@ public class BookCopy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private BookStatuses status;
 
     @NotNull
     @ManyToOne
@@ -35,7 +45,13 @@ public class BookCopy {
     )
     List<Rental> rentalList = new ArrayList<>();
 
-    public BookCopy(String status) {
+    public BookCopy(BookStatuses status) {
+        this.status = status;
+    }
+
+    public BookCopy(Long id, Book book, BookStatuses status) {
+        this.id = id;
+        this.book = book;
         this.status = status;
     }
 }

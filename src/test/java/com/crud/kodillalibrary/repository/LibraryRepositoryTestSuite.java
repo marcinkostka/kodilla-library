@@ -1,17 +1,12 @@
 package com.crud.kodillalibrary.repository;
 
-import com.crud.kodillalibrary.domain.Book;
-import com.crud.kodillalibrary.domain.BookCopy;
-import com.crud.kodillalibrary.domain.Rental;
-import com.crud.kodillalibrary.domain.Reader;
+import com.crud.kodillalibrary.domain.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.time.LocalDate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,12 +25,12 @@ public class LibraryRepositoryTestSuite {
     public void testLibraryRepositorySave() {
 
         //Given
-        BookCopy bookCopy = new BookCopy("available");
-        BookCopy bookCopy2 = new BookCopy("available");
-        BookCopy bookCopy3 = new BookCopy("not available");
-        BookCopy bookCopy4 = new BookCopy("not available");
+        BookCopy bookCopy = new BookCopy(BookStatuses.AVAILABLE);
+        BookCopy bookCopy2 = new BookCopy(BookStatuses.AVAILABLE);
+        BookCopy bookCopy3 = new BookCopy(BookStatuses.DAMAGED);
+        BookCopy bookCopy4 = new BookCopy(BookStatuses.NOT_AVAILABLE);
 
-        Book book = new Book("Kodilla Course 1", "Jan Kowalski", 2017);
+        Book book = new Book("Kodilla", "Jan Kowalski", 2017);
         Book book2 = new Book("Kodilla Course 2","Jak Nowak", 2018);
 
         book.getBookCopyList().add(bookCopy);
@@ -43,10 +38,12 @@ public class LibraryRepositoryTestSuite {
         book.getBookCopyList().add(bookCopy3);
         book2.getBookCopyList().add(bookCopy4);
 
-        Rental rental = new Rental(LocalDate.of(2017,11,30), null);
-        Rental rental2 = new Rental(LocalDate.of(2018,02,25), LocalDate.of(2018,03,31));
-        Rental rental3 = new Rental(LocalDate.of(2018,03,15), null);
-        Rental rental4 = new Rental(LocalDate.of(2018,01,15), LocalDate.of(2018,02,11));
+        Rental rental = new Rental();
+        Rental rental2 = new Rental();
+        Rental rental3 = new Rental();
+        Rental rental4 = new Rental();
+        //rental4.setReturnDate(LocalDate.of(2018,02,11));
+        rental4.resetReturnDate();
 
         Reader reader = new Reader("Marcin", "Kostka");
         Reader reader2 = new Reader("Andrzej", "Kostka");
@@ -103,10 +100,10 @@ public class LibraryRepositoryTestSuite {
 
         //CleanUp
         try {
-            rentalRepository.deleteAll();
-            bookCopyRepository.deleteAll();
-            bookRepository.deleteAll();
-            readerRepository.deleteAll();
+            //rentalRepository.deleteAll();
+            //bookCopyRepository.deleteAll();
+            //bookRepository.deleteAll();
+            //readerRepository.deleteAll();
 
         } catch (Exception e) {
 
