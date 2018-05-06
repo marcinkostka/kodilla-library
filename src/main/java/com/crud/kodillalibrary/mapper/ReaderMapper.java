@@ -13,21 +13,19 @@ public class ReaderMapper {
         return new Reader(
                 readerDto.getId(),
                 readerDto.getFirstName(),
-                readerDto.getLastName(),
-                readerDto.getRegistered());
+                readerDto.getLastName());
     }
 
     public ReaderDto mapToReaderDto(final Reader reader) {
         return new ReaderDto(
                 reader.getId(),
                 reader.getFirstName(),
-                reader.getLastName(),
-                reader.getRegistered());
+                reader.getLastName());
     }
 
     public List<ReaderDto> mapToReaderDtoList(final List<Reader> readerList) {
         return readerList.stream()
-                .map(r -> new ReaderDto(r.getId(),r.getFirstName(),r.getLastName(),r.getRegistered()))
+                .map(r -> new ReaderDto(r.getId(),r.getFirstName(),r.getLastName()))
                 .collect(Collectors.toList());
     }
 }

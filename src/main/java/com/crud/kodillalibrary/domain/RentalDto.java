@@ -11,4 +11,6 @@ public class RentalDto {
     private Long id;
     private Long readerId;
     private Long bookCopyId;
+    private LocalDate rentDate;
+    private LocalDate returnDate;
 }

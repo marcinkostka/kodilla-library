@@ -21,7 +21,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "booksCopy")
 public class BookCopy {
@@ -45,13 +44,13 @@ public class BookCopy {
     )
     List<Rental> rentalList = new ArrayList<>();
 
-    public BookCopy(BookStatuses status) {
-        this.status = status;
+    public BookCopy() {
+        this.status = BookStatuses.AVAILABLE;
     }
 
-    public BookCopy(Long id, Book book, BookStatuses status) {
+    public BookCopy(Long id, Book book) {
         this.id = id;
         this.book = book;
-        this.status = status;
+        this.status = BookStatuses.AVAILABLE;
     }
 }

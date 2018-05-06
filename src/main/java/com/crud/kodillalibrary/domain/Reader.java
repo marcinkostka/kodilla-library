@@ -45,10 +45,10 @@ public class Reader {
         this.registered = LocalDate.now();
     }
 
-    public Reader(Long id, String firstName, String lastName, LocalDate registered) {
+    public Reader(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.registered = registered;
+        this.registered = LocalDate.now();
     }
 }

@@ -15,14 +15,14 @@ public class BookCopyMapper {
     @Autowired
     private BookRepository bookRepository;
 
-    public BookCopy mapToBookCopy(BookCopyDto bookCopyDto) {
+    public BookCopy mapToBookCopy(final BookCopyDto bookCopyDto) {
         return new BookCopy(
                 bookCopyDto.getId(),
-                bookRepository.findById(bookCopyDto.getBookId()).get(),
-                bookCopyDto.getStatus());
+                bookRepository.findById(bookCopyDto.getBookId()).get());
+                //bookCopyDto.getStatus());
     }
 
-    public BookCopyDto mapToBookCopyDto(BookCopy bookCopy) {
+    public BookCopyDto mapToBookCopyDto(final BookCopy bookCopy) {
         return new BookCopyDto(
                 bookCopy.getId(),
                 bookCopy.getBook().getId(),
