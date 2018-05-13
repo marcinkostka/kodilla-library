@@ -72,7 +72,7 @@ public class LibraryController {
         return bookCopyMapper.mapToBookCopyDto(dbService.updateStatus(bookCopyDto));
     }
 
-    @GetMapping(value = "getCopiesByTitleAvailable")
+    @GetMapping(value = "getCopiesCountByTitleAvailable")
     public Integer getCopiesCountByTitle(@RequestParam String title) {
         return dbService.getCountOfBookCopiesByBookTitleAndAvailable(title);
     }
