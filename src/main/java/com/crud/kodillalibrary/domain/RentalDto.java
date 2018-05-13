@@ -1,29 +1,26 @@
 package com.crud.kodillalibrary.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@Getter
 public class RentalDto {
     private Long id;
     private Long readerId;
     private Long bookCopyId;
-    private LocalDate rentDate;
+    private int yearRent;
+    private int monthRent;
+    private int dayRent;
     private LocalDate returnDate;
 
-    /*public RentalDto() {
+    public RentalDto() {
     }
 
     public RentalDto(Long id, Long readerId, Long bookCopyId, LocalDate rentDate, LocalDate returnDate) {
         this.id = id;
         this.readerId = readerId;
         this.bookCopyId = bookCopyId;
-        this.rentDate = rentDate;
+        this.yearRent = rentDate.getYear();
+        this.monthRent = rentDate.getMonthValue();
+        this.dayRent = rentDate.getDayOfMonth();
         this.returnDate = returnDate;
     }
 
@@ -40,10 +37,10 @@ public class RentalDto {
     }
 
     public LocalDate getRentDate() {
-        return rentDate;
+        return LocalDate.of(yearRent, monthRent, dayRent);
     }
 
     public LocalDate getReturnDate() {
         return returnDate;
-    }*/
+    }
 }

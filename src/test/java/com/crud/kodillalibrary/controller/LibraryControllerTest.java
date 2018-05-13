@@ -2,9 +2,7 @@ package com.crud.kodillalibrary.controller;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import com.crud.kodillalibrary.domain.*;
@@ -27,9 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -232,11 +228,6 @@ public class LibraryControllerTest {
         //Given
         RentalDto rentalDto = new RentalDto(1L, 1L, 1L, LocalDate.now(), null);
 
-        Book book = new Book(1L,"Title","Author", 2018);
-        BookCopy bookCopy = new BookCopy(1L, book);
-
-        when(dbService.findBookCopyByIdAndAvailableStatus(anyLong(), ArgumentMatchers.any(BookStatuses.class))).thenReturn(Optional.ofNullable(bookCopy));
-
         Gson gson = new Gson();
         String jsonContent = gson.toJson(rentalDto);
 
@@ -251,15 +242,15 @@ public class LibraryControllerTest {
     @Test
     public void shouldUpdateRental() throws Exception {
         //Given
-        RentalDto rentalDto = new RentalDto(1L, 1L, 1L, LocalDate.of(2018,5,10), null);
-        RentalDto rentalDtoUpdate = new RentalDto(1L, 1L, 1L, LocalDate.of(2018,5,10), LocalDate.of(2018,5,11));
+        RentalDto rentalDto = new RentalDto(1L, 1L, 1L, LocalDate.of(2018,05,10), null);
+        RentalDto rentalDtoUpdate = new RentalDto(1L, 1L, 1L, LocalDate.of(2018,05,10), LocalDate.of(2018,5,11));
 
         Book book = new Book(1L,"Title","Author", 2018);
         BookCopy bookCopy = new BookCopy(1L, book);
         Reader reader = new Reader(1L, "firstName", "lastName");
         Rental rental = new Rental(1L, reader, bookCopy);
 
-        when(dbService.updateRental(rentalDto)).thenReturn(rental);
+        when(dbService.updateRental(ArgumentMatchers.any())).thenReturn(rental);
         when(rentalMapper.mapToRentalDto(dbService.updateRental(rentalDto))).thenReturn(rentalDtoUpdate);
 
         Gson gson = new Gson();
